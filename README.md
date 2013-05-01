@@ -5,6 +5,7 @@ Pacman package manager aliases, vimrc and vim configurations.
 
 ##What's Included
 * Pacman package manager aliases:
+
 	pac = sudo pacman
 	pacs = sudo pacman -S
 	pacsyy = sudo pacman -Syy
@@ -14,7 +15,9 @@ Pacman package manager aliases, vimrc and vim configurations.
 	pacq = sudo pacman -Q
 		
 * Arch Linux build system
+
 	makes = makepkg -s
+	
 Vim configuration files include
 * [Pathogen](https://github.com/tpope/vim-pathogen)
 * [Nerdtree](https://github.com/scrooloose/nerdtree)
