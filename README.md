@@ -14,7 +14,7 @@ Pacman package manager aliases, vimrc and vim configurations.
 	pacupkg = sudo pacman -U *.xz (Installs any package in the directory)
 	pacq = sudo pacman -Q
 		
-* Arch Linux build system
+* Arch Linux build system:
 
 	makes = makepkg -s
 	
