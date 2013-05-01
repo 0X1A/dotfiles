@@ -1,0 +1,9 @@
+[user]
+	name = "Your name here"
+	email = "Your email here"
+[alias]
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
