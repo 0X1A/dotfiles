@@ -18,7 +18,7 @@ Arch Linux build system:
 
 	makes = makepkg -s
 	
-The included .zshrc makes use of [oh-my-zsh](https://github.com/Lokaltog/vim-powerline), and is set to use the 'agnoster' theme by default.
+The included .zshrc makes use of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), and is set to use the 'agnoster' theme by default.
 
 Included Vim plugins:
 * [Pathogen](https://github.com/tpope/vim-pathogen)
