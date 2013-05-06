@@ -6,8 +6,9 @@ set	expandtab
 set	tabstop=4
 retab
 set	shiftwidth=4
-set	number
 set	mouse=a
+set	number
+set ttymouse=xterm2
 
 let g:Powerline_symbols = 'fancy'
 
