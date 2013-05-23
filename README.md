@@ -23,5 +23,5 @@ The included .zshrc makes use of [oh-my-zsh](https://github.com/robbyrussell/oh-
 Used Vim plugins:
 * [Pathogen](https://github.com/tpope/vim-pathogen)
 * [Nerdtree](https://github.com/scrooloose/nerdtree)
-* [Vim-Powerline](https://github.com/Lokaltog/vim-powerline)
+* [Powerline](https://github.com/Lokaltog/powerline)
 * [Solarized Color Scheme](https://github.com/altercation/vim-colors-solarized)
