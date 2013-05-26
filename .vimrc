@@ -18,6 +18,7 @@ set	mouse=a
 set ttymouse=xterm2
 
 " Empty nerdtree
+let NERDTreeShowHidden=1
 autocmd vimenter * NERDTree
 
 " Solarized color scheme
