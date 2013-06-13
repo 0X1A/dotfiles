@@ -1,4 +1,5 @@
  *
+.directory
  !*.zshrc
  !*.md
  !*.bashrc
