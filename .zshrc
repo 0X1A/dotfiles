@@ -1,5 +1,8 @@
 ZSH=$HOME/.oh-my-zsh
 
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' insert-tab pending
+
 CASE_SENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
 
