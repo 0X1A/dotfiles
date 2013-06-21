@@ -1,9 +1,8 @@
 #dotfiles
-##Summary
 
-Pacman package manager aliases, Archlinux Build System aliases, vimrc and vim configurations.
+Pacman package manager aliases, Archlinux Build System aliases, Apt aliases, vimrc and vim configurations.
 
-##What's Included | Bash and ZSH Aliases
+####What's Included | Bash and ZSH Aliases
 Pacman package manager:
 
 	pac = sudo pacman
@@ -33,3 +32,8 @@ Used Vim plugins:
 * [Nerdtree](https://github.com/scrooloose/nerdtree)
 * [Powerline](https://github.com/Lokaltog/powerline)
 * [Solarized Color Scheme](https://github.com/altercation/vim-colors-solarized)
+
+##How to install
+
+    git clone https://github.com/0x1A/dotfiles && cd dotfiles
+    bash install.sh
