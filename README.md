@@ -17,8 +17,16 @@ Pacman package manager:
 Arch Linux build system:
 
 	makes = makepkg -s
+
+Apt:
+    
+    update = sudo apt-get udpate
+    upgrade = sudo apt-get upgrade
+    dist-upgrade = sudo apt-get dist-upgrade
+    install = sudo apt-get install
+    purge = sudo apt-get purge
 	
-The included .zshrc makes use of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), and is set to use the 'agnoster' theme by default.
+The included .zshrc makes use of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
 Used Vim plugins:
 * [Pathogen](https://github.com/tpope/vim-pathogen)
