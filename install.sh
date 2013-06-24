@@ -21,5 +21,7 @@ curl -Sso $HOME/.vim/autoload/pathogen.vim \
     https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 cd $HOME/.vim/bundle
 git clone https://github.com/scrooloose/nerdtree
+git clone https://github.com/altercation/vim-colors-solarized
+cd $HOME/.vim/bundle/vim-colors-solarized/colors/solarized.vim $HOME/.vim/colors/
 
 echo "Done"
