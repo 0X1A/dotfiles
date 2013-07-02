@@ -43,5 +43,11 @@ Used Vim plugins:
 
 ##How to install
 
+###What it does
+Clones Pathogen, Nerdtree, Solarized color scheme, and oh-my-zsh
+
+###What it doesn't
+Does not install zsh or Powerline. Both must be installed by the user.
+
     git clone https://github.com/0x1A/dotfiles && cd dotfiles
     bash install.sh
