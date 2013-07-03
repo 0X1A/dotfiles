@@ -10,7 +10,7 @@
 
 Pacman package manager aliases, Archlinux Build System aliases, Apt aliases, vimrc and vim configurations.
 
-####What's Included | Bash and ZSH Aliases
+####What's Included | ZSH Aliases
 Pacman package manager:
 
 	pac = sudo pacman
