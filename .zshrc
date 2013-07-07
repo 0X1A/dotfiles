@@ -15,6 +15,11 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=$PATH:/usr/lib/qt4/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
 
+# Not needed if installing Powerline with AUR package
+#export PATH=$HOME/.local/bin:$PATH
+#
+#    . $HOME/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+
 #
 # Uncomment to needs
 #
