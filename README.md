@@ -8,7 +8,7 @@
                                                            
                                                            
 
-Pacman package manager aliases, Archlinux Build System aliases, Apt aliases, vimrc and vim configurations.
+Pacman package manager aliases, Archlinux Build System aliases, vimrc and vim configurations.
 
 ####What's Included | ZSH Aliases
 Pacman package manager:
@@ -25,14 +25,6 @@ Arch Linux build system:
 
 	makes = makepkg -s
 
-Apt:
-    
-    update = sudo apt-get udpate
-    upgrade = sudo apt-get upgrade
-    dist-upgrade = sudo apt-get dist-upgrade
-    install = sudo apt-get install
-    purge = sudo apt-get purge
-	
 The included .zshrc makes use of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
 Used Vim plugins:
@@ -42,12 +34,9 @@ Used Vim plugins:
 * [Solarized Color Scheme](https://github.com/altercation/vim-colors-solarized)
 
 ##How to install
-
+Just run `install.sh`
 ###What it does
 Clones Pathogen, Nerdtree, Solarized color scheme, and oh-my-zsh
 
 ###What it doesn't
 Does not install zsh or Powerline. Both must be installed by the user.
-
-    git clone https://github.com/0x1A/dotfiles && cd dotfiles
-    bash install.sh

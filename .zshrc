@@ -25,20 +25,13 @@ export PATH=$PATH:/usr/lib/qt4/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:
 #
 
 # Pacman 
-#alias pac='sudo pacman'
-#alias pacs='sudo pacman -S'
-#alias pacsyy='sudo pacman -Syy'
-#alias pacsyyu='sudo pacman -Syyu'
-#alias pacq='sudo pacman -Q'
-#alias pacu='sudo pacman -U'
-#alias pacupkg='sudo pacman -U *.xz'
+alias pac='sudo pacman'
+alias pacs='sudo pacman -S'
+alias pacsyy='sudo pacman -Syy'
+alias pacsyyu='sudo pacman -Syyu'
+alias pacq='sudo pacman -Q'
+alias pacu='sudo pacman -U'
+alias pacupkg='sudo pacman -U *.xz'
 
 # ABS
-#alias makes='makepkg -s'
-
-# Apt
-#alias update='sudo apt-get update'
-#alias upgrade='sudo apt-get upgrade'
-#alias dist-upgrade='sudo apt-get dist-upgrade'
-#alias install='sudo apt-get install'
-#alias purge='sudo apt-get purge'
+alias makes='makepkg -s'
