@@ -10,7 +10,7 @@
 
 Pacman package manager aliases, Archlinux Build System aliases, vimrc and vim configurations.
 
-####What's Included | ZSH Aliases
+#### What's Included | ZSH Aliases
 Pacman package manager:
 
 	pac = sudo pacman
@@ -33,10 +33,10 @@ Used Vim plugins:
 * [Powerline](https://github.com/Lokaltog/powerline)
 * [Solarized Color Scheme](https://github.com/altercation/vim-colors-solarized)
 
-##How to install
+## How to install
 Just run `install.sh`
-###What it does
+### What it does
 Clones Pathogen, Nerdtree, Solarized color scheme, and oh-my-zsh
 
-###What it doesn't
+### What it doesn't
 Does not install zsh or Powerline. Both must be installed by the user.
