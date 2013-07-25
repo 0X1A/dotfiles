@@ -4,6 +4,7 @@ filetype indent on
 syntax on
 
 set number
+set cc=80
 set cursorline
 set hlsearch
 set ignorecase
