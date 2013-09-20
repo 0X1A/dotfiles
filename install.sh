@@ -56,4 +56,6 @@ mkdir ycm_build && cd ycm_build
 cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-amd64-Ubuntu-12.04.2 . $VIMDIR/bundle/YouCompleteMe/cpp
 make ycm_core
 
+rm -r clang+llvm-3.3-amd64-Ubuntu-12.04.2
+
 echo "Done"

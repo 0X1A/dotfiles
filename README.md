@@ -31,7 +31,7 @@ Used Vim plugins:
 * [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 
 ### YouCompleteMe
-YouCompleteMe needs .ycm_extra_conf.py for semantic support, a default is installed in the home directory.
+YouCompleteMe needs `.ycm_extra_conf.py` for semantic support, a default is installed in the home directory.
 This particular configuration is set with C++ flags.
 
 ## How to install
