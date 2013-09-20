@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# dotfile installation
-# Copies .zshrc, .vimrc, clones pathogen and nerdtree
-
 cp .ycm_extra_conf.py $HOME
 
 echo "Checking dependencies"
