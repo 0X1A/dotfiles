@@ -1,8 +1,2 @@
- *
 .directory
- !*.zshrc
- !*.md
- !*.bashrc
- !*.gitignore
- !*.vim
- !*.vim
+*.pyc
