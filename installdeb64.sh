@@ -44,17 +44,17 @@ cd $VIMDIR/bundle
 git clone https://github.com/scrooloose/syntastic
 
 echo "Pulling LLVM to build YouCompleteMe..."
-wget http://llvm.org/releases/3.3/clang+llvm-3.3-amd64-Ubuntu-12.04.2.tar.gz2
-tar -xf clang+llvm-3.3-amd64-Ubuntu-12.04.2.tar.gz
+wget http://llvm.org/releases/3.3/clang+llvm-3.3-amd64-debian6.tar.bz2
+tar -xf clang+llvm-3.3-amd64-debian6.tar.bz2
 echo "Cloning YouCompleteMe..."
 git clone https://github.com/Valloric/YouCompleteMe
 
 mkdir ycm_build && cd ycm_build
-cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-amd64-Ubuntu-12.04.2 . $VIMDIR/bundle/YouCompleteMe/cpp
+cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-amd64-debian6 . $VIMDIR/bundle/YouCompleteMe/cpp
 make ycm_core
 
 rm -r $VIMDIR/bundle/ycm_build
-rm -r $VIMDIR/bundle/clang+llvm-3.3-amd64-Ubuntu-12.04.2
-rm $VIMDIR/bundle/clang+llvm-3.3-amd64-Ubuntu-12.04.2.tar.gz
+rm -r $VIMDIR/bundle/clang+llvm-3.3-amd64-debian6
+rm $VIMDIR/bundle/clang+llvm-3.3-amd64-debian6.tar.bz2
 
 echo "Done"
