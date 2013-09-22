@@ -55,6 +55,6 @@ make ycm_core
 
 rm -r $VIMDIR/bundle/ycm_build
 rm -r $VIMDIR/bundle/clang+llvm-3.3-i386-debian6
-rm $VIMDIR/bundle/http://llvm.org/releases/3.3/clang+llvm-3.3-i386-debian6.tar.bz2
+rm $VIMDIR/bundle/clang+llvm-3.3-i386-debian6.tar.bz2
 
 echo "Done"
