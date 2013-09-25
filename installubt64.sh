@@ -44,7 +44,7 @@ cd $VIMDIR/bundle
 git clone https://github.com/scrooloose/syntastic
 
 echo "Pulling LLVM to build YouCompleteMe..."
-wget http://llvm.org/releases/3.3/clang+llvm-3.3-amd64-Ubuntu-12.04.2.tar.gz2
+wget http://llvm.org/releases/3.3/clang+llvm-3.3-amd64-Ubuntu-12.04.2.tar.gz
 tar -xf clang+llvm-3.3-amd64-Ubuntu-12.04.2.tar.gz
 echo "Cloning YouCompleteMe..."
 git clone https://github.com/Valloric/YouCompleteMe
