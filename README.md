@@ -21,6 +21,7 @@ Apt package manager:
     purge = sudo apt-get purge
 
 Pacman:
+
     pacs = sudo pacman -S
     pacu = sudo pacman -U
     pacsyy = sudo pacman -Syy
