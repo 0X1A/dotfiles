@@ -31,7 +31,7 @@ git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
 
 echo "Cloning Vim plugins"
 curl -Sso $VIMDIR/autoload/pathogen.vim \
-    https://raw.github.com/tpop/vim-pathogen/master/autoload/pathogen.vim
+    https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 cd $VIMDIR/bundle
 
 echo "Cloning NerdTree..."
