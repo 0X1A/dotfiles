@@ -8,7 +8,7 @@
                                                            
                                                            
 
-Apt aliases, vimrc and vim configurations.
+Apt & Pacman aliases, zshrc, vimrc and vim configurations.
 
 #### What's Included | ZSH Aliases
 Apt package manager:
@@ -19,6 +19,14 @@ Apt package manager:
 	install = sudo apt-get install
 	remove = sudo apt-get remove
     purge = sudo apt-get purge
+
+Pacman:
+    pacs = sudo pacman -S
+    pacu = sudo pacman -U
+    pacsyy = sudo pacman -Syy
+    pacsyyu = sudo pacman -Syyu
+    pacr = sudo pacman -R
+    pacupkg = sudo pacman -U *.tar.xz
 
 The included .zshrc makes use of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
