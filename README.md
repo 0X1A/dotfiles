@@ -9,6 +9,8 @@
 
 Apt & Pacman aliases, zshrc, vimrc and vim configurations.
 
+![dotfiles](http://i.imgur.com/w8KZCAs.png)
+
 #### What's Included | ZSH Aliases
 Apt package manager:
 
