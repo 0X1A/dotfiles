@@ -66,6 +66,7 @@ then
     cd $VIMDIR/bundle/ycm_build/
     cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON . $VIMDIR/bundle/YouCompleteMe/cpp
     make ycm_core
+    make
 elif [ -f $DEB ]
 then
     echo Is Debian based
