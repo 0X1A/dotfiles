@@ -61,7 +61,7 @@ then
     echo "Checking dependencies"
     TGT=$(pacman -T $ARCHDEPS)
     sudo pacman -S $TGT
-    cd $VIMDIR/bundle/YouCompeteMe
+    cd $VIMDIR/bundle/YouCompleteMe
     git submodule update --init --recursive
     cd $VIMDIR/bundle/ycm_build/
     cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON . $VIMDIR/bundle/YouCompleteMe/cpp
