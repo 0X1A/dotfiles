@@ -8,6 +8,7 @@ BIT=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 VIMDIR=$HOME/.vim
 
 cp .ycm_extra_conf.py $HOME
+cp .vimrc $HOME
 
 if [ -f $ARCH ]
 then
@@ -60,6 +61,8 @@ then
     echo "Checking dependencies"
     TGT=$(pacman -T $ARCHDEPS)
     sudo pacman -S $TGT
+    cd $VIMDIR/bundle/YouCompeteMe
+    git submodule update --init --recursive
     cd $VIMDIR/bundle/ycm_build/
     cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON . $VIMDIR/bundle/YouCompleteMe/cpp
     make ycm_core
