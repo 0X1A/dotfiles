@@ -24,6 +24,7 @@ set sidescroll=1
 set noswapfile
 set nobackup
 set nowb
+set backspace=indent,eol,start
 
 retab
 set shiftwidth=4
