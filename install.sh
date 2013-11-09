@@ -1,11 +1,12 @@
 #!/bin/bash
 
 ARCH=/etc/arch-release
-DEB=/etc/lsb-release
+DEB=/etc/os-release
 ARCHDEPS="python2-setuptools git curl wget cmake clang"
-DEBDEPS="curl clang cmake wget build-essential python-pip"
+DEBDEPS="curl clang cmake wget build-essential python-pip python-dev libclang-dev"
 BIT=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 VIMDIR=$HOME/.vim
+LLVM=*.bz2
 
 cp .ycm_extra_conf.py $HOME
 cp .vimrc $HOME
@@ -19,7 +20,7 @@ fi
 if [ -f $DEB ]
 then
     echo "Copying .zshrc for Deb"
-    cp .zshrc ~/.zshrc
+    cp .zshrcdeb ~/.zshrc
 fi
 
 mkdir $VIMDIR
@@ -52,7 +53,32 @@ git clone https://github.com/Valloric/YouCompleteMe
 mkdir $VIMDIR/bundle/ycm_build
 
 GetLLVM () {
+    cd $VIMDIR/bundle
+    if [ ! -f "LLVM" ] ; then
+        if [ $BIT == '64' ]
+        then
+            wget llvm.org/releases/3.3/clang+llvm-3.3-amd64-debian6.tar.bz2
+            tar -xvf clang+llvm-3.3-amd64-debian6.tar.bz2
+        else [ $BIT == '32' ]
+            wget llvm.org/releases/3.3/clang+llvm-3.3-i386-debian6.tar.bz2
+            tar -xvf clang+llvm-3.3-i386-debian6.tar.bz2
+        fi
+    fi
     return 0
+}
+
+BuildYCM () {
+    cd $VIMDIR/bundle/YouCompleteMe
+    git submodule update --init --recursive
+    cd $VIMDIR/bundle/ycm_build
+    if [ $BIT == '32' ]
+    then
+        cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-i386-debian6 . $VIMDIR/bundle/YouCompleteMe/cpp
+    else [ $BIT == '64' ]
+        cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-amd64-debian6 . $VIMDIR/bundle/YouCompleteMe/cpp
+    fi
+    make ycm_core
+    make
 }
 
 if [ -f $ARCH ]
@@ -79,4 +105,5 @@ then
         echo "Dependencies met."
     fi
     GetLLVM
+    BuildYCM
 fi
