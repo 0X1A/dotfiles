@@ -16,7 +16,7 @@ YouCompleteMe needs `.ycm_extra_conf.py` for semantic support, a default is inst
 This particular configuration is set with C++ flags.
 
 ## How to install
-Just run the `install.sh` that coincides with your distribution (deb == Debian).
+Just run `install.sh`. (`bash install.sh` or `./install.sh`)
 ### What it does
 Clones Pathogen, Nerdtree, Solarized color scheme, oh-my-zsh, Syntastic, and YouCompleteMe. It also pulls LLVM 3.3
 in order to build YouCompleteMe with C family semantic support.
