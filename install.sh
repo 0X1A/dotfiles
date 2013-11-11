@@ -6,7 +6,8 @@ ARCHDEPS="python2-setuptools git curl wget cmake clang"
 DEBDEPS="curl clang cmake wget build-essential python-pip python-dev libclang-dev"
 BIT=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 VIMDIR=$HOME/.vim
-LLVM=*.bz2
+LLVM32=clang+llvm-3.3-i386-debian6.tar.bz2
+LLVM64=clang+llvm-3.3-amd64-debian6.tar.bz2
 
 cp .ycm_extra_conf.py $HOME
 cp .vimrc $HOME
@@ -54,15 +55,23 @@ mkdir $VIMDIR/bundle/ycm_build
 
 GetLLVM () {
     cd $VIMDIR/bundle
-    if [ ! -f "LLVM" ] ; then
-        if [ $BIT == '64' ]
+    if [ $BIT == '32' ]
+    then
+        if [ ! -f "$LLVM32" ]
         then
-            wget llvm.org/releases/3.3/clang+llvm-3.3-amd64-debian6.tar.bz2
-            tar -xvf clang+llvm-3.3-amd64-debian6.tar.bz2
-        else [ $BIT == '32' ]
+            echo "Downloading LLVM..."
             wget llvm.org/releases/3.3/clang+llvm-3.3-i386-debian6.tar.bz2
             tar -xvf clang+llvm-3.3-i386-debian6.tar.bz2
         fi
+        echo "LLVM tar exists."
+    else [ $BIT == '64' ]
+        if [ ! -f "$LLVM64" ]
+        then
+            echo "Downloading LLVM..."
+            wget llvm.org/releases/3.3/clang+llvm-3.3-amd64-debian6.tar.bz2
+            tar -xvf clang+llvm-3.3-amd64-debian6.tar.bz2
+        fi
+        echo "LLVM tar exists."
     fi
     return 0
 }
