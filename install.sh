@@ -1,7 +1,6 @@
 #!/bin/bash
 
-ARCH=/etc/arch-release
-DEB=/etc/os-release
+DIST=/etc/os-release
 ARCHDEPS="python2-setuptools git curl wget cmake clang"
 DEBDEPS="curl clang cmake wget build-essential python-pip python-dev libclang-dev"
 BIT=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
@@ -12,13 +11,13 @@ LLVM64=clang+llvm-3.3-amd64-debian6.tar.bz2
 cp .ycm_extra_conf.py $HOME
 cp .vimrc $HOME
 
-if [ -f $ARCH ]
+if grep Arch -c $DIST &>/dev/null
 then
     echo "Copying .zshrc for Arch"
     cp .zshrcarch ~/.zshrc
 fi
 
-if [ -f $DEB ]
+if grep Debian -c $DIST &>/dev/null
 then
     echo "Copying .zshrc for Deb"
     cp .zshrcdeb ~/.zshrc
@@ -90,7 +89,7 @@ BuildYCM () {
     make
 }
 
-if [ -f $ARCH ]
+if grep Arch -c $DIST &>/dev/null
 then
     echo Is Arch
     echo "Checking dependencies"
@@ -102,7 +101,7 @@ then
     cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON . $VIMDIR/bundle/YouCompleteMe/cpp
     make ycm_core
     make
-elif [ -f $DEB ]
+elif grep Debian -c $DIST &>/dev/null
 then
     echo Is Debian based
     dpkg -s $DEBDEPS >/dev/null 2>&1
