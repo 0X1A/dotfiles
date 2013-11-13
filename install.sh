@@ -10,6 +10,7 @@ LLVM64=clang+llvm-3.3-amd64-debian6.tar.bz2
 
 cp .ycm_extra_conf.py $HOME
 cp .vimrc $HOME
+cp .Xresources $HOME
 
 if grep Arch -c $DIST &>/dev/null
 then
