@@ -14,12 +14,9 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=$PATH:/usr/lib/qt4/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
 
-# Not needed if installing Powerline with AUR package
-#export PATH=$HOME/.local/bin:$PATH
-#
-#    . $HOME/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-
 #    . /usr/share/zsh/site-contrib/powerline.zsh
+
+# Pacman
 
 alias pacs='sudo pacman -S'
 alias pacu='sudo pacman -U'
@@ -28,3 +25,13 @@ alias pacsyyu='sudo pacman -Syyu'
 alias pacq='sudo pacman -Q'
 alias pacr='sudo pacman -R'
 alias pacupkg='sudo pacman -U *.tar.xz'
+
+# Git
+
+alias gst='git status'
+alias gch='git checkout'
+alias gci='git commit'
+alias gls='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate'
+alias gll='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
+alias glds='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
+alias glg='git log --graph --oneline --decorate --all'
