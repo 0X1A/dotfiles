@@ -1,6 +1,7 @@
 #!/bin/bash
 
 DIST=/etc/os-release
+DIR=$(dirname $0)
 ARCHDEPS="python2-setuptools git curl wget cmake clang"
 DEBDEPS="curl clang cmake wget build-essential python-pip python-dev libclang-dev"
 BIT=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
@@ -8,20 +9,20 @@ VIMDIR=$HOME/.vim
 LLVM32=clang+llvm-3.3-i386-debian6.tar.bz2
 LLVM64=clang+llvm-3.3-amd64-debian6.tar.bz2
 
-cp .ycm_extra_conf.py $HOME
-cp .vimrc $HOME
-cp .Xresources $HOME
+cp $DIR/.ycm_extra_conf.py $HOME
+cp $DIR/.vimrc $HOME
+cp $DIR/.Xresources $HOME
 
 if grep Arch -c $DIST &>/dev/null
 then
     echo "Copying .zshrc for Arch"
-    cp .zshrcarch ~/.zshrc
+    cp $DIR/.zshrcarch ~/.zshrc
 fi
 
 if grep Debian -c $DIST &>/dev/null
 then
     echo "Copying .zshrc for Deb"
-    cp .zshrcdeb ~/.zshrc
+    cp $DIR/.zshrcdeb ~/.zshrc
 fi
 
 mkdir $VIMDIR
