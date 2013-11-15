@@ -19,7 +19,9 @@ export PATH=$PATH:/usr/lib/qt4/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:
 #
 #    . $HOME/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
-    . /usr/share/zsh/site-contrib/powerline.zsh
+#    . /usr/share/zsh/site-contrib/powerline.zsh
+
+# Apt
 
 alias update='sudo apt-get update'
 alias upgrade='sudo apt-get upgrade'
@@ -27,3 +29,13 @@ alias dist-upgrade='sudo apt-get dist-upgrade'
 alias install='sudo apt-get install'
 alias remove='sudo apt-get remove'
 alias purge='sudo apt=get purge'
+
+# Git
+
+alias gst='git status'
+alias gch='git checkout'
+alias gci='git commit'
+alias gls='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate'
+alias gll='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
+alias glds='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
+alias glg='git log --graph --oneline --decorate --all'
