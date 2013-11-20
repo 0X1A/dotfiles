@@ -6,7 +6,7 @@ The included .zshrc makes use of [oh-my-zsh](https://github.com/robbyrussell/oh-
 Used Vim plugins:
 * [Pathogen](https://github.com/tpope/vim-pathogen)
 * [Nerdtree](https://github.com/scrooloose/nerdtree)
-* [Powerline](https://github.com/Lokaltog/powerline)
+* [Vim-Airline](https://github.com/bling/vim-airline)
 * [Solarized Color Scheme](https://github.com/altercation/vim-colors-solarized)
 * [Syntastic](https://github.com/scrooloose/syntastic)
 * [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)

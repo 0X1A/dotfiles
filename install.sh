@@ -12,6 +12,7 @@ LLVM64=clang+llvm-3.3-amd64-debian6.tar.bz2
 cp $DIR/.ycm_extra_conf.py $HOME
 cp $DIR/.vimrc $HOME
 cp $DIR/.Xresources $HOME
+xrdb -merge $HOME/.Xresources
 
 if grep Arch -c $DIST &>/dev/null
 then
@@ -51,6 +52,9 @@ git clone https://github.com/scrooloose/syntastic
 
 echo "Cloning YouCompleteMe..."
 git clone https://github.com/Valloric/YouCompleteMe
+
+eho "Cloning Vim-Airline..."
+git clone https://github.com/bling/vim-airline
 
 mkdir $VIMDIR/bundle/ycm_build
 
