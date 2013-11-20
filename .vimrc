@@ -32,7 +32,8 @@ set mouse=a
 set ttymouse=xterm2
 
 " Empty nerdtree
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden = 1
+let g:NERDTreeWinSize = 20
 autocmd vimenter * NERDTree
 
 " Default .ycm_extra_conf.py
