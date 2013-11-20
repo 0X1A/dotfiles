@@ -1,4 +1,5 @@
 ZSH=$HOME/.oh-my-zsh
+ZSH_THEME=agnoster
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' insert-tab pending
@@ -14,7 +15,9 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=$PATH:/usr/lib/qt4/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
 
-#    . /usr/share/zsh/site-contrib/powerline.zsh
+alias :q='exit'
+alias :e='vim'
+alias :te='vim -u NONE -N'
 
 # Pacman
 
