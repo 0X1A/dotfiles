@@ -39,6 +39,9 @@ autocmd vimenter * NERDTree
 let g:ycm_global_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 
+" Powerline fonts for Airline
+let g:airline_powerline_fonts = 1
+
 " Solarized color scheme
 set t_Co=256
 set background=dark
