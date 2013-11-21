@@ -27,4 +27,4 @@ Clones Pathogen, Nerdtree, Solarized color scheme, oh-my-zsh, Syntastic, and You
 in order to build YouCompleteMe with C family semantic support.
 
 ### What it doesn't
-Does not install zsh or Powerline. Both must be installed by the user.
+Does not install zsh, this must be installed by the user.
