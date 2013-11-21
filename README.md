@@ -1,7 +1,9 @@
-![dotfiles](http://i.imgur.com/w8KZCAs.png)
-
+![dotfiles](http://i.imgur.com/7zsMP5D.png?1)
 
 The included .zshrc makes use of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+
+### Git Aliases
+For more detailson git aliases, view the [git.md](https://github.com/0x1A/dotfiles/blob/master/git.md)
 
 Used Vim plugins:
 * [Pathogen](https://github.com/tpope/vim-pathogen)
