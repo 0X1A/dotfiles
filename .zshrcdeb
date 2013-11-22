@@ -30,10 +30,14 @@ alias purge='sudo apt=get purge'
 
 # Git
 
+
+
 alias gst='git status'
 alias gch='git checkout'
 alias gpl='git pull'
 alias gcl='git clone'
+alias grt='git remote'
+alias gpsh='git push'
 alias gci='git commit'
 alias gad='git add'
 alias grm='git rm'
