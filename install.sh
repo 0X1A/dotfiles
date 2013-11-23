@@ -13,6 +13,8 @@ cp $DIR/.ycm_extra_conf.py $HOME
 cp $DIR/.vimrc $HOME
 cp $DIR/.Xresources $HOME
 xrdb -merge $HOME/.Xresources
+mkdir $HOME/.zsh
+cp $DIR/git $HOME/.zsh
 
 if grep Arch -c $DIST &>/dev/null
 then
