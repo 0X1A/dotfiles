@@ -15,6 +15,7 @@ cp $DIR/.Xresources $HOME
 xrdb -merge $HOME/.Xresources
 mkdir $HOME/.zsh
 cp $DIR/git $HOME/.zsh
+cp $DIR/functions $HOME/.zsh
 
 if grep Arch -c $DIST &>/dev/null
 then
