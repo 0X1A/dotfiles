@@ -9,6 +9,50 @@ VIMDIR=$HOME/.vim
 LLVM32=clang+llvm-3.3-i386-debian6.tar.bz2
 LLVM64=clang+llvm-3.3-amd64-debian6.tar.bz2
 
+SetZSHRC() {
+    if grep Arch -c $DIST &>/dev/null
+    then
+        if [ -f $HOME/.zshrc ] ; then
+            echo "Copy .zshrc and backup local copy?"
+            echo "Enter 1) backup and copy 2)copy and replace 3) skip"
+            read ANS
+            if [[ $ANS == '1' ]] ; then
+                echo "Copying and backing up .zshrc to .zshrcbak"
+                mv $HOME/.zshrc $HOME/.zshrcbak
+                cp $DIR/.zshrcarch $HOME/.zshrc
+            elif [[ $ANS == '2' ]] ; then
+                echo "Copying and replacing"
+                cp $DIR/.zshrcarch $HOME/.zshrc
+            elif [[ $ANS == '3' ]] ; then
+                echo "Skipping..."
+            fi
+        else cp $DIR/.zshrcarch $HOME/.zshrc
+        fi
+    fi
+
+    if grep Debian -c $DIST &>/dev/null
+    then
+        if [ -f $HOME/.zshrc ] ; then
+            echo "Copy .zshrc and backup local copy?"
+            echo "Enter 1) backup and copy 2) copy and replace 3) skip"
+            read ANS
+            if [[ $ANS == '1' ]] ; then
+                echo "Copying and backing up .zshrc to $HOME/zshrcbak"
+                mv $HOME/.zshrc $HOME/zshrcbak
+                cp $DIR/.zshrcdeb $HOME/.zshrc
+            elif [[ $ANS == '2' ]] ; then
+                echo "Copying and replacing"
+                cp $DIR/.zshrcdeb $HOME/.zshrc
+            elif [[ $ANS == '3' ]] ; then
+                echo "Skipping..."
+            fi
+        else cp $DIR/.zshrcdeb $HOME/.zshrc
+        fi
+    fi
+}
+
+SetZSHRC
+
 cp $DIR/.ycm_extra_conf.py $HOME
 cp $DIR/.vimrc $HOME
 cp $DIR/.Xresources $HOME
@@ -16,18 +60,6 @@ xrdb -merge $HOME/.Xresources
 mkdir $HOME/.zsh
 cp $DIR/git $HOME/.zsh
 cp $DIR/functions $HOME/.zsh
-
-if grep Arch -c $DIST &>/dev/null
-then
-    echo "Copying .zshrc for Arch"
-    cp $DIR/.zshrcarch ~/.zshrc
-fi
-
-if grep Debian -c $DIST &>/dev/null
-then
-    echo "Copying .zshrc for Deb"
-    cp $DIR/.zshrcdeb ~/.zshrc
-fi
 
 mkdir $VIMDIR
 mkdir $VIMDIR/bundle
