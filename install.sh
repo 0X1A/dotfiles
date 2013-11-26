@@ -2,8 +2,8 @@
 
 DIST=/etc/os-release
 DIR=$(dirname $0)
-ARCHDEPS="python2-setuptools git curl wget cmake clang"
-DEBDEPS="curl clang cmake wget build-essential python-pip python-dev libclang-dev"
+ARCHDEPS="git curl wget cmake clang"
+DEBDEPS="curl cmake wget build-essential python-dev"
 BIT=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 VIMDIR=$HOME/.vim
 LLVM32=clang+llvm-3.3-i386-debian6.tar.bz2
