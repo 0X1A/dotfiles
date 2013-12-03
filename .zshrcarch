@@ -21,7 +21,6 @@ export PATH=$PATH:/usr/lib/qt4/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:
 alias :q='exit'
 alias :e='vim'
 alias :te='vim -u NONE -N'
-alias cat='cat @1 | less'
 alias c='clear'
 
 # Pacman
