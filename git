@@ -1,3 +1,5 @@
+#!/bin/bash
+
 alias gst='git status'
 alias gch='git checkout'
 alias gpl='git pull'

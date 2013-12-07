@@ -2,8 +2,8 @@
 
 DIST=/etc/os-release
 DIR=$(dirname $0)
-ARCHDEPS="git curl wget cmake clang"
-DEBDEPS="curl cmake wget build-essential python-dev"
+ARCHDEPS="git curl wget cmake clang ctags"
+DEBDEPS="curl cmake wget build-essential python-dev ctags"
 BIT=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 VIMDIR=$HOME/.vim
 LLVM32=clang+llvm-3.3-i386-debian6.tar.bz2
@@ -69,10 +69,15 @@ mkdir $VIMDIR/colors
 echo "Cloning oh-my-zsh"
 git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
 
-echo "Cloning Vim plugins"
+echo "Cloning Vim plugins..."
+
+echo "Cloning Pathogen..."
 curl -Sso $VIMDIR/autoload/pathogen.vim \
     https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 cd $VIMDIR/bundle
+
+echo "Cloning Fugitive..."
+git clone git://github.com/tpope/vim-fugitive.git
 
 echo "Cloning NerdTree..."
 git clone https://github.com/scrooloose/nerdtree
