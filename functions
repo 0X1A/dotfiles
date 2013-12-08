@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Extracts compressed files
 ext () {
     if [ -f $1 ] ; then
         case $1 in
@@ -19,4 +20,14 @@ ext () {
     else
         echo "'$1' is not a valid file"
     fi
+}
+
+# Clears trailing white space on files
+cleartrailing () {
+    sed --in-place 's/[[:space:]]\+$//' $@
+}
+
+# Numbered cat piped to the less pager
+catless () {
+    cat -n $1 | less
 }
