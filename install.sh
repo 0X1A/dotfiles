@@ -2,7 +2,7 @@
 
 DIST=/etc/os-release
 DIR=$(dirname $0)
-ARCHDEPS="git curl wget cmake clang ctags"
+ARCHDEPS="git curl wget cmake clang ctags python2"
 DEBDEPS="curl cmake wget build-essential python-dev ctags"
 BIT=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 VIMDIR=$HOME/.vim
