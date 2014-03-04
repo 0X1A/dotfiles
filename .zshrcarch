@@ -13,10 +13,13 @@ CASE_SENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
 
 export UPDATE_ZSH_DAYS=14
+export PANEL_FIFO=/tmp/panel-fifo
+export PANEL_HEIGHT=20
 
 plugins=(git)
 
 export PATH=$PATH:/usr/lib/qt4/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
+export PATH=$PATH:$HOME/.config/bspwm/panel:$(ruby -rubygems -e "puts Gem.user_dir")/bin
 
 alias :q='exit'
 alias :e='vim'
@@ -27,6 +30,8 @@ alias c='clear'
 
 alias pacs='sudo pacman -S'
 alias pacu='sudo pacman -U'
+alias pacsy='sudo pacman -Sy'
+alias pacsyu='sudo pacman -Syu'
 alias pacsyy='sudo pacman -Syy'
 alias pacsyyu='sudo pacman -Syyu'
 alias pacq='sudo pacman -Q'

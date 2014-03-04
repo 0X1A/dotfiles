@@ -17,6 +17,7 @@ export UPDATE_ZSH_DAYS=14
 plugins=(git)
 
 export PATH=$PATH:/usr/lib/qt4/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
+export PATH=$PATH:$(ruby -rubygems -e "puts Gem.user_dir"/bin
 
 alias :q='exit'
 alias :e='vim'
