@@ -1,21 +1,27 @@
 ## Git Aliases
 ```
-gst = git status
-gch = git checkout
-gpl = git pull
-gcl = git clone
-grt = git remote
-gpsh = git push
-gci = git commit
-gcis = git commit -S -s -m
-gad = git add
-grm = git rm
-gdf = git diff
-gls = git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --show-signature
-gls = git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-gll = git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-glds = git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-glg = git log --graph --oneline --decorate --all
+alias gst='git status'
+alias gch='git checkout'
+alias gpl='git pull'
+alias gcl='git clone'
+alias grt='git remote'
+alias gmr='git merge'
+alias gfch='git fetch'
+alias gbr='git branch'
+alias gpsh='git push'
+alias gci='git commit'
+alias gcism='git commit -S -s -m'
+alias gcis='git commit -s'
+alias gciss='git commit -S -s'
+alias gad='git add'
+alias grm='git rm'
+alias grst='git reset'
+alias gdf='git diff'
+alias glss='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --show-signature'
+alias gls='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate'
+alias gll='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
+alias glds='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
+alias glg='git log --graph --oneline --decorate --all'
 ```
 
 ## Why bash aliases instead of using .gitconfig?
