@@ -95,7 +95,7 @@ InstVim() {
 	echo "Cloning Vim plugins..."
 
 	echo "Cloning Pathogen..."
-	curl -Sso $VIMDIR/autoload/pathogen.vim \
+	curl -LSso $VIMDIR/autoload/pathogen.vim \
 		https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 	cd $VIMDIR/bundle
 
