@@ -5,8 +5,13 @@ do
 	if [[ $CUR_TIME > '20:00:00' ]] ; then
 		redshift -l 41:87
 	fi
-	if [[ $CUR_TIME < '7:00:00' ]] ; then
-		echo "0" &>/dev/null
+	if [[ $CUR_TIME < '07:00:00' ]] ; then
+		redshift -l 41:87
+	fi
+	if [[ $CUR_TIME > '07:00:00' ]] ; then
+		if pgrep redshift &>/dev/null ; then
+			pkill redshift
+		fi
 	fi
 	sleep 10s
 done
