@@ -1,0 +1,12 @@
+#!/bin/bash
+while [ 1 -gt 0 ]
+do
+	CUR_TIME=$(date +%T)
+	if [[ $CUR_TIME > '20:00:00' ]] ; then
+		redshift -l 41:87
+	fi
+	if [[ $CUR_TIME < '7:00:00' ]] ; then
+		echo "0" &>/dev/null
+	fi
+	sleep 10s
+done

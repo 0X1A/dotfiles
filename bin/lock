@@ -1,0 +1,9 @@
+IMG=/tmp/lock.png
+SCRN="scrot $IMG"
+
+BLR="0x5"
+
+$SCRN
+convert $IMG -blur $BLR $IMG
+i3lock -i $IMG
+rm $IMG
