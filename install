@@ -151,9 +151,9 @@ BuildYCM () {
 	cd $VIMDIR/bundle/ycm_build
 	if [ $BIT == '32' ]
 	then
-		cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-i386-debian6 . $VIMDIR/bundle/YouCompleteMe/cpp
+		cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-i386-debian6 . $VIMDIR/bundle/YouCompleteMe/third_party/ycmd/cpp
 	else [ $BIT == '64' ]
-		cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-amd64-debian6 . $VIMDIR/bundle/YouCompleteMe/cpp
+		cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-amd64-debian6 . $VIMDIR/bundle/YouCompleteMe/third_party/ycmd/cpp
 	fi
 	make ycm_core
 	make
@@ -163,8 +163,8 @@ AltBuildYCM () {
 	cd $VIMDIR/bundle/YouCompleteMe
 	git submodule update --init --recursive
 	cd $VIMDIR/bundle/ycm_build
-	cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON . $VIMDIR/bundle/YouCompleteMe/cpp
-	make ycm_core
+	cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON . $VIMDIR/bundle/YouCompleteMe/third_party/ycmd/cpp
+	make ycm_support_libs
 	make
 }
 
