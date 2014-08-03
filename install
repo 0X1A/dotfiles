@@ -1,123 +1,69 @@
 #!/bin/bash
 
-DIST=/etc/os-release
 DIR=$(dirname $0)
 ARCHDEPS="git curl wget cmake clang ctags python2"
 DEBDEPS="curl cmake wget build-essential python-dev ctags"
 RPMDEPS="wget curl cmake clang llvm"
-BIT=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
+ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 VIMDIR=$HOME/.vim
 LLVM32=clang+llvm-3.3-i386-debian6.tar.bz2
 LLVM64=clang+llvm-3.3-amd64-debian6.tar.bz2
 JOBS=`nproc`
 
-ArchSetZSHRC() {
+case "$1" in
+	'--arch')
+		ZSHRCFILE=".zshrcarch"
+		;;
+	'--fed')
+		ZSHRCFILE=".zshrcfed"
+		;;
+	'--deb')
+		ZSHRCFILE=".zshrcdeb"
+		;;
+esac
+
+SetZSHRC() {
 	if [ -f $HOME/.zshrc ] ; then
 		echo "Copy .zshrc and backup local copy?"
-		echo "Enter 1) backup and copy 2) copy and replace 3) skip"
+		echo -e "\t1) Backup and copy\n\t2) Copy and replace\n\t3) Skip"
 		read ANS
 	fi
-
 	if [[ $ANS == '1' ]] ; then
 		echo "Copying and backing up .zshrc to .zshrcbak"
 		mv $HOME/.zshrc $HOME/.zshrcbak
-		cp $DIR/.zshrcarch $HOME/.zshrc
+		cp $DIR/$ZSHRCFILE $HOME/.zshrc
 	elif [[ $ANS == '2' ]] ; then
 		echo "Copying and replacing"
-		cp $DIR/.zshrcarch $HOME/.zshrc
-	elif [[ $ANS == '3' ]] ; then
-		echo "Skipping..."
-	fi
-
-	if [ ! -f $HOME/.zshrc ] ; then
-		cp $DIR/.zshrcarch $HOME/.zshrc
-	fi
-}
-
-DebSetZSHRC() {
-	if [ -f $HOME/.zshrc ] ; then
-		echo "Copy .zshrc and backup local copy?"
-		echo "Enter 1) backup and copy 2) copy and replace 3) skip"
-		read ANS
-	fi
-	if [[ $ANS == '1' ]] ; then
-		echo "Copying and backing up .zshrc to $HOME/zshrcbak"
-		mv $HOME/.zshrc $HOME/zshrcbak
-		cp $DIR/.zshrcdeb $HOME/.zshrc
-	elif [[ $ANS == '2' ]] ; then
-		echo "Copying and replacing"
-		cp $DIR/.zshrcdeb $HOME/.zshrc
+		cp $DIR/$ZSHRCFILE $HOME/.zshrc
 	elif [[ $ANS == '3' ]] ; then
 		echo "Skipping..."
 	fi
 	if [ ! -f $HOME/.zshrc ] ; then
-		cp $DIR/.zshrcdeb $HOME/.zshrc
-	fi
-}
-
-FedSetZSHRC() {
-	if [ -f $HOME/.zshrc ] ; then
-		echo "Copy .zshrc and backup local copy?"
-		echo "Enter 1) backup and copy 2) copy and replace 3) skip"
-		read ANS
-	fi
-	if [[ $ANS == '1' ]] ; then
-		echo "Copying and backing up .zshrc to $HOME/zshrcbak"
-		mv $HOME/.zshrc $HOME/zshrcbak
-		cp $DIR/.zshrcrpm $HOME/.zshrc
-	elif [[ $ANS == '2' ]] ; then
-		echo "Copying and replacing"
-		cp $DIR/.zshrcrpm $HOME/.zshrc
-	elif [[ $ANS == '3' ]] ; then
-		echo "Skipping..."
-	fi
-	if [ ! -f $HOME/.zshrc ] ; then
-		cp $DIR/.zshrcdeb $HOME/.zshrc
+		cp $DIR/$ZSHRCFILE $HOME/.zshrc
 	fi
 }
 
 InstVim() {
 	cp $DIR/.ycm_extra_conf.py $HOME
 	cp $DIR/.vimrc $HOME
-	cp $DIR/.Xresources $HOME
-	xrdb -merge $HOME/.Xresources
 	mkdir -p $HOME/.zsh
 	cp $DIR/git $HOME/.zsh
 	cp $DIR/functions $HOME/.zsh
 
-	mkdir -p $VIMDIR
-	mkdir -p $VIMDIR/bundle
-	mkdir -p $VIMDIR/autoload
-	mkdir -p $VIMDIR/colors
+	mkdir -p {$VIMDIR, $VIMDIR/bundle, $VIMDIR/autoload, $VIMDIR/colors}
 
-	echo "Cloning oh-my-zsh"
+	echo "Pulling plugins..."
 	git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
-
-	echo "Cloning Vim plugins..."
-
-	echo "Cloning Pathogen..."
 	curl -LSso $VIMDIR/autoload/pathogen.vim \
 		https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 	cd $VIMDIR/bundle
-
-	echo "Cloning Fugitive..."
 	git clone git://github.com/tpope/vim-fugitive.git
-
-	echo "Cloning NerdTree..."
 	git clone https://github.com/scrooloose/nerdtree
-
-	echo "Cloning Solarized..."
 	git clone https://github.com/altercation/vim-colors-solarized
 	cp $VIMDIR/bundle/vim-colors-solarized/colors/solarized.vim $VIMDIR/colors/
-
-	echo "Cloning Syntastic..."
 	cd $VIMDIR/bundle
 	git clone https://github.com/scrooloose/syntastic
-
-	echo "Cloning YouCompleteMe..."
 	git clone https://github.com/Valloric/YouCompleteMe
-
-	echo "Cloning Vim-Airline..."
 	git clone https://github.com/bling/vim-airline
 
 	mkdir -p $VIMDIR/bundle/ycm_build
@@ -125,18 +71,15 @@ InstVim() {
 
 GetLLVM () {
 	cd $VIMDIR/bundle
-	if [ $BIT == '32' ]
-	then
-		if [ ! -f "$LLVM32" ]
-		then
+	if [ $ARCH == '32' ] ; then
+		if [ ! -f "$LLVM32" ] ; then
 			echo "Downloading LLVM..."
 			wget llvm.org/releases/3.3/clang+llvm-3.3-i386-debian6.tar.bz2
 			tar -xvf clang+llvm-3.3-i386-debian6.tar.bz2
 		fi
 		echo "LLVM tar exists."
-	else [ $BIT == '64' ]
-		if [ ! -f "$LLVM64" ]
-		then
+	else [ $ARCH == '64' ]
+		if [ ! -f "$LLVM64" ] ; then
 			echo "Downloading LLVM..."
 			wget llvm.org/releases/3.3/clang+llvm-3.3-amd64-debian6.tar.bz2
 			tar -xvf clang+llvm-3.3-amd64-debian6.tar.bz2
@@ -150,10 +93,9 @@ BuildYCM () {
 	cd $VIMDIR/bundle/YouCompleteMe
 	git submodule update --init --recursive
 	cd $VIMDIR/bundle/ycm_build
-	if [ $BIT == '32' ]
-	then
+	if [ $ARCH == '32' ] ; then
 		cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-i386-debian6 . $VIMDIR/bundle/YouCompleteMe/third_party/ycmd/cpp
-	else [ $BIT == '64' ]
+	else [ $ARCH == '64' ]
 		cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-amd64-debian6 . $VIMDIR/bundle/YouCompleteMe/third_party/ycmd/cpp
 	fi
 	make ycm_core -j$JOBS
@@ -178,8 +120,7 @@ ArchDeps() {
 
 DebDeps() {
 	dpkg -s $DEBDEPS >/dev/null 2>&1
-	if [ "$?" -ne "0" ]
-	then
+	if [ "$?" -ne "0" ] ; then
 		echo "$DEBDEPS not installed, installing now"
 		sudo apt-get install -y $DEBDEPS
 	else
@@ -201,29 +142,28 @@ error() {
 }
 
 usage() {
-	echo "usage: install [option]"
-	echo
-	echo "Options:"
-	echo "	--arch	-	install Arch dotfiles"
-	echo "	--deb	-	install Debian dotfiles"
-	echo "	--fed	-	install Fedora dotfiles"
-	echo "	--help	-	display this"
+	echo -e "usage: install [option]\n"
+	echo -e "Options:"
+	echo -e "\t--arch\tInstall Arch dotfiles"
+	echo -e "\t--deb\tInstall Debian dotfiles"
+	echo -e "\t--fed\tInstall Fedora dotfiles"
+	echo -e "\t--help\tDisplay this"
 	exit
 }
 
 case "$1" in
 	'--arch')
-		ArchSetZSHRC
+		SetZSHRC
 		InstVim
 		ArchDeps
 		;;
 	'--deb')
-		DebSetZSHRC
+		SetZSHRC
 		InstVim
 		DebDeps
 		;;
 	'--fed')
-		FedSetZSHRC
+		SetZSHRC
 		InstVim
 		FedDeps
 		;;
