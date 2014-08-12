@@ -50,7 +50,7 @@ InstVim() {
 	cp $DIR/git $HOME/.zsh
 	cp $DIR/functions $HOME/.zsh
 
-	mkdir -p {$VIMDIR, $VIMDIR/bundle, $VIMDIR/autoload, $VIMDIR/colors}
+	mkdir -p $VIMDIR $VIMDIR/bundle $VIMDIR/autoload $VIMDIR/colors
 
 	echo "Pulling plugins..."
 	git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
