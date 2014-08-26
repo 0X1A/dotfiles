@@ -17,11 +17,12 @@ alias gad='git add'
 alias grm='git rm'
 alias grst='git reset'
 alias gdf='git diff'
+alias glg='git log'
 alias glss='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --show-signature'
 alias gls='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate'
 alias gll='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
 alias glds='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
-alias glg='git log --graph --oneline --decorate --all'
+alias glgg='git log --graph --oneline --decorate --all'
 
 galias() {
 	echo "Git aliases:"
