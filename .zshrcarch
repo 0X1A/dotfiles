@@ -36,3 +36,5 @@ alias pacq='sudo pacman -Q'
 alias pacr='sudo pacman -R'
 alias pacrsc='sudo pacman -Rsc'
 alias pacupkg='sudo pacman -U *.tar.xz'
+
+alias sysctl='sudo systemctl'
