@@ -45,7 +45,6 @@ SetZSHRC() {
 
 InstVim() {
 	cp $DIR/.ycm_extra_conf.py $HOME
-	cp $DIR/.vimrc $HOME
 	mkdir -p $HOME/.zsh
 	cp $DIR/git $HOME/.zsh
 	cp $DIR/functions $HOME/.zsh
@@ -63,12 +62,16 @@ InstVim() {
 	cp $VIMDIR/bundle/vim-colors-solarized/colors/solarized.vim $VIMDIR/colors/
 	cd $VIMDIR/bundle
 	git clone https://github.com/scrooloose/syntastic
-	git clone https://github.com/Valloric/YouCompleteMe
 	git clone https://github.com/bling/vim-airline
 	git clone https://github.com/airblade/vim-gitgutter
 	git clone https://github.com/kristijanhusak/vim-multiple-cursors
 
-	mkdir -p $VIMDIR/bundle/ycm_build
+}
+
+InstNeo() {
+	cd $VIMDIR/bundle
+	git clone https://github.com/Shougo/neocomplete.vim
+	cp $DIR/vimrcneo $HOME/.vimrc
 }
 
 GetLLVM () {
@@ -92,6 +95,8 @@ GetLLVM () {
 }
 
 BuildYCM () {
+	git clone https://github.com/Valloric/YouCompleteMe
+	mkdir -p $VIMDIR/bundle/ycm_build
 	cd $VIMDIR/bundle/YouCompleteMe
 	git submodule update --init --recursive
 	cd $VIMDIR/bundle/ycm_build
@@ -102,22 +107,25 @@ BuildYCM () {
 	fi
 	make ycm_core -j$JOBS
 	make -j$JOBS
+	cp $DIR/vimrcycm $HOME/.vimrc
 }
 
 AltBuildYCM () {
+	git clone https://github.com/Valloric/YouCompleteMe
+	mkdir -p $VIMDIR/bundle/ycm_build
 	cd $VIMDIR/bundle/YouCompleteMe
 	git submodule update --init --recursive
 	cd $VIMDIR/bundle/ycm_build
 	cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON . $VIMDIR/bundle/YouCompleteMe/third_party/ycmd/cpp
 	make ycm_support_libs -j$JOBS
 	make -j$JOBS
+	cp $DIR/vimrcycm $HOME/.vimrc
 }
 
 ArchDeps() {
 	echo "Checking dependencies"
 	TGT=$(pacman -T $ARCHDEPS)
 	sudo pacman -S $TGT
-	AltBuildYCM
 }
 
 DebDeps() {
@@ -135,7 +143,6 @@ DebDeps() {
 FedDeps() {
 	sudo yum groupinstall "Development Tools" "Development Libraries" -y
 	sudo yum install $RPMDEPS -y
-	AltBuildYCM
 }
 
 error() {
@@ -144,12 +151,15 @@ error() {
 }
 
 usage() {
-	echo -e "usage: install [option]\n"
-	echo -e "Options:"
+	echo -e "usage: install --[distro] --[option]\n"
+	echo -e "Distros:"
 	echo -e "\t--arch\tInstall Arch dotfiles"
 	echo -e "\t--deb\tInstall Debian dotfiles"
 	echo -e "\t--fed\tInstall Fedora dotfiles"
 	echo -e "\t--help\tDisplay this"
+	echo -e "Options:"
+	echo -e "\t--neo\tInstall Neocomplete"
+	echo -e "\t--ycm\tInstall YouCompleteMe"
 	exit
 }
 
@@ -175,4 +185,15 @@ case "$1" in
 	*)
 		error "Unrecognized option \`$1', see install --help"
 		;;
+esac
+
+case "$2" in
+	'--neo')
+		InstNeo
+		;;
+	'--ycm')
+		AltBuildYCM
+		;;
+	*)
+		error "Unrecognized option \`$2', see install --help"
 esac
