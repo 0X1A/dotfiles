@@ -65,6 +65,8 @@ InstVim() {
 	git clone https://github.com/scrooloose/syntastic
 	git clone https://github.com/Valloric/YouCompleteMe
 	git clone https://github.com/bling/vim-airline
+	git clone https://github.com/airblade/vim-gitgutter
+	git clone https://github.com/kristijanhusak/vim-multiple-cursors
 
 	mkdir -p $VIMDIR/bundle/ycm_build
 }

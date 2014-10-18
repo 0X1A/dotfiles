@@ -51,3 +51,8 @@ inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {{     {
 inoremap {}     {}
+
+" Git gutter
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_realtime = 1
+:highlight SignColumn ctermbg=black
