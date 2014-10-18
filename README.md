@@ -12,6 +12,8 @@ Used Vim plugins:
 * [Solarized Color Scheme](https://github.com/altercation/vim-colors-solarized)
 * [Syntastic](https://github.com/scrooloose/syntastic)
 * [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
+* [Vim-GitGutter](https://github.com/airblade/vim-gitgutter)
+* [Vim-Multiple-Cursors](https://github.com/kristijanhusak/vim-multiple-curors)
 
 ### YouCompleteMe
 YouCompleteMe needs `.ycm_extra_conf.py` for semantic support, a default is installed in the home directory.
