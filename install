@@ -53,8 +53,8 @@ InstVim() {
 
 	echo "Pulling plugins..."
 	git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
-	curl -LSso $VIMDIR/autoload/pathogen.vim \
-		https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+	curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
 	cd $VIMDIR/bundle
 	git clone git://github.com/tpope/vim-fugitive.git
 	git clone https://github.com/scrooloose/nerdtree
@@ -71,7 +71,8 @@ InstVim() {
 InstNeo() {
 	cd $VIMDIR/bundle
 	git clone https://github.com/Shougo/neocomplete.vim
-	cp $DIR/vimrcneo $HOME/.vimrc
+	cd $DIR
+	cp vimrcneo $HOME/.vimrc
 }
 
 GetLLVM () {
