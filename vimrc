@@ -1,5 +1,24 @@
-execute pathogen#infect()
+if !1 | finish | endif
+
+if has('vim_starting')
+	set nocompatible
+	set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#end()
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'kristijanhusak/vim-multiple-cursors'
+
 filetype plugin on
+NeoBundleCheck
+
 filetype indent on
 syntax on
 
@@ -44,9 +63,6 @@ inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 let NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 20
 autocmd vimenter * NERDTree
-
-" Default .ycm_extra_conf.py
-" let g:ycm_confirm_extra_conf = 0
 
 " Powerline fonts for Airline
 let g:airline_powerline_fonts = 1
