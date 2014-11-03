@@ -1,199 +1,90 @@
 #!/bin/bash
 
 DIR=$(dirname $0)
-ARCHDEPS="git curl wget cmake clang ctags python2"
-DEBDEPS="curl cmake wget build-essential python-dev ctags"
-RPMDEPS="wget curl cmake clang llvm"
-ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
-VIMDIR=$HOME/.vim
-LLVM32=clang+llvm-3.3-i386-debian6.tar.bz2
-LLVM64=clang+llvm-3.3-amd64-debian6.tar.bz2
-JOBS=`nproc`
+ARCHDEPS="vim zsh"
+FEDDEPS="vim-enhanced zsh"
+DEBDEPS="vim-nox zsh"
+NC='\e[0m'
+WHT='\e[1;37m'
+GRN='\e[0;32m'
 
 case "$1" in
 	'--arch')
 		ZSHRCFILE=".zshrcarch"
+		OS="arch"
 		;;
 	'--fed')
 		ZSHRCFILE=".zshrcfed"
+		OS="fed"
 		;;
 	'--deb')
 		ZSHRCFILE=".zshrcdeb"
+		OS="deb"
 		;;
 esac
 
-SetZSHRC() {
+set_zshrc() {
 	if [ -f $HOME/.zshrc ] ; then
-		echo "Copy .zshrc and backup local copy?"
-		echo -e "\t1) Backup and copy\n\t2) Copy and replace\n\t3) Skip"
+		echo -e $WHT"Copy .zshrc and backup local copy?"$NC
+		echo -e $GRN"\t1) Backup and copy\n\t2) Copy and replace\n\t3) Skip"$NC
 		read ANS
 	fi
 	if [[ $ANS == '1' ]] ; then
-		echo "Copying and backing up .zshrc to .zshrcbak"
+		echo -e $WHT"Copying and backing up .zshrc to .zshrcbak"$NC
 		mv $HOME/.zshrc $HOME/.zshrcbak
 		cp $DIR/$ZSHRCFILE $HOME/.zshrc
 	elif [[ $ANS == '2' ]] ; then
-		echo "Copying and replacing"
+		echo -e $WHT"Copying and replacing"$NC
 		cp $DIR/$ZSHRCFILE $HOME/.zshrc
 	elif [[ $ANS == '3' ]] ; then
-		echo "Skipping..."
+		echo -e $WHT"Skipping..."$NC
 	fi
 	if [ ! -f $HOME/.zshrc ] ; then
 		cp $DIR/$ZSHRCFILE $HOME/.zshrc
 	fi
 }
 
-InstVim() {
-	cp $DIR/.ycm_extra_conf.py $HOME
-	mkdir -p $HOME/.zsh
-	cp $DIR/git $HOME/.zsh
-	cp $DIR/functions $HOME/.zsh
-
-	mkdir -p $VIMDIR $VIMDIR/bundle $VIMDIR/autoload $VIMDIR/colors
-
-	echo "Pulling plugins..."
-	git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
-	curl -LSso $VIMDIR/autoload/pathogen.vim \
-		https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-	cd $VIMDIR/bundle
-	git clone git://github.com/tpope/vim-fugitive.git
-	git clone https://github.com/scrooloose/nerdtree
-	git clone https://github.com/altercation/vim-colors-solarized
-	cp $VIMDIR/bundle/vim-colors-solarized/colors/solarized.vim $VIMDIR/colors/
-	cd $VIMDIR/bundle
-	git clone https://github.com/scrooloose/syntastic
-	git clone https://github.com/bling/vim-airline
-	git clone https://github.com/airblade/vim-gitgutter
-	git clone https://github.com/kristijanhusak/vim-multiple-cursors
-
+inst_plugins() {
+	curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 }
 
-InstNeo() {
-	cd $VIMDIR/bundle
-	git clone https://github.com/Shougo/neocomplete.vim
-	cp $DIR/vimrcneo $HOME/.vimrc
-}
-
-GetLLVM () {
-	cd $VIMDIR/bundle
-	if [ $ARCH == '32' ] ; then
-		if [ ! -f "$LLVM32" ] ; then
-			echo "Downloading LLVM..."
-			wget llvm.org/releases/3.3/clang+llvm-3.3-i386-debian6.tar.bz2
-			tar -xvf clang+llvm-3.3-i386-debian6.tar.bz2
-		fi
-		echo "LLVM tar exists."
-	else [ $ARCH == '64' ]
-		if [ ! -f "$LLVM64" ] ; then
-			echo "Downloading LLVM..."
-			wget llvm.org/releases/3.3/clang+llvm-3.3-amd64-debian6.tar.bz2
-			tar -xvf clang+llvm-3.3-amd64-debian6.tar.bz2
-		fi
-		echo "LLVM tar exists."
-	fi
-	return 0
-}
-
-BuildYCM () {
-	git clone https://github.com/Valloric/YouCompleteMe
-	mkdir -p $VIMDIR/bundle/ycm_build
-	cd $VIMDIR/bundle/YouCompleteMe
-	git submodule update --init --recursive
-	cd $VIMDIR/bundle/ycm_build
-	if [ $ARCH == '32' ] ; then
-		cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-i386-debian6 . $VIMDIR/bundle/YouCompleteMe/third_party/ycmd/cpp
-	else [ $ARCH == '64' ]
-		cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=$VIMDIR/bundle/clang+llvm-3.3-amd64-debian6 . $VIMDIR/bundle/YouCompleteMe/third_party/ycmd/cpp
-	fi
-	make ycm_core -j$JOBS
-	make -j$JOBS
-	cp $DIR/vimrcycm $HOME/.vimrc
-}
-
-AltBuildYCM () {
-	git clone https://github.com/Valloric/YouCompleteMe
-	mkdir -p $VIMDIR/bundle/ycm_build
-	cd $VIMDIR/bundle/YouCompleteMe
-	git submodule update --init --recursive
-	cd $VIMDIR/bundle/ycm_build
-	cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON . $VIMDIR/bundle/YouCompleteMe/third_party/ycmd/cpp
-	make ycm_support_libs -j$JOBS
-	make -j$JOBS
-	cp $DIR/vimrcycm $HOME/.vimrc
-}
-
-ArchDeps() {
-	echo "Checking dependencies"
-	TGT=$(pacman -T $ARCHDEPS)
-	sudo pacman -S $TGT
-}
-
-DebDeps() {
-	dpkg -s $DEBDEPS >/dev/null 2>&1
-	if [ "$?" -ne "0" ] ; then
-		echo "$DEBDEPS not installed, installing now"
-		sudo apt-get install -y $DEBDEPS
-	else
-		echo "Dependencies met."
-	fi
-	GetLLVM
-	BuildYCM
-}
-
-FedDeps() {
-	sudo yum groupinstall "Development Tools" "Development Libraries" -y
-	sudo yum install $RPMDEPS -y
-}
-
-error() {
-	echo "$1"
-	exit 1
+inst() {
+	inst_plugins
+	set_zshrc
+	cp $DIR/vimrc $HOME/.vimrc
+	case "$OS" in
+		'arch')
+			TGT=`pacman -T $ARCHDEPS`
+			sudo pacman -S $TGT
+			;;
+		'fed')
+			sudo yum install $RPMDEPS -y
+			;;
+		'deb')
+			dpkg -s $DEBDEPS >/dev/null 2>&1
+			if [ "$?" -ne "0" ] ; then
+				sudo apt-get install -y $DEBDEPS
+			fi
+			;;
+	esac
+	vim +NeoBundleInstall +qall
 }
 
 usage() {
-	echo -e "usage: install --[distro] --[option]\n"
+	echo -e "usage: install --[distro]\n"
 	echo -e "Distros:"
 	echo -e "\t--arch\tInstall Arch dotfiles"
 	echo -e "\t--deb\tInstall Debian dotfiles"
 	echo -e "\t--fed\tInstall Fedora dotfiles"
 	echo -e "\t--help\tDisplay this"
-	echo -e "Options:"
-	echo -e "\t--neo\tInstall Neocomplete"
-	echo -e "\t--ycm\tInstall YouCompleteMe"
 	exit
 }
 
 case "$1" in
-	'--arch')
-		SetZSHRC
-		InstVim
-		ArchDeps
+	'--arch'|'--deb'|'--fed')
+		inst
 		;;
-	'--deb')
-		SetZSHRC
-		InstVim
-		DebDeps
-		;;
-	'--fed')
-		SetZSHRC
-		InstVim
-		FedDeps
-		;;
-	''|'-h'|'--help')
+	*)
 		usage
 		;;
-	*)
-		error "Unrecognized option \`$1', see install --help"
-		;;
-esac
-
-case "$2" in
-	'--neo')
-		InstNeo
-		;;
-	'--ycm')
-		AltBuildYCM
-		;;
-	*)
-		error "Unrecognized option \`$2', see install --help"
 esac
