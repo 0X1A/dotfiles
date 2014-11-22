@@ -1,9 +1,9 @@
 #!/bin/bash
 
 DIR=$(dirname $0)
-ARCHDEPS="vim zsh"
-FEDDEPS="vim-enhanced zsh"
-DEBDEPS="vim-nox zsh"
+ARCHDEPS="vim zsh git"
+FEDDEPS="vim-enhanced zsh git"
+DEBDEPS="vim-nox zsh git"
 NC='\e[0m'
 WHT='\e[1;37m'
 GRN='\e[0;32m'
@@ -24,6 +24,9 @@ case "$1" in
 esac
 
 set_zshrc() {
+	mkdir -p $HOME/.zsh
+	cp $DIR/functions $DIR/git $HOME/.zsh
+	curl -L http://install.ohmyz.sh | sh
 	if [ -f $HOME/.zshrc ] ; then
 		echo -e $WHT"Copy .zshrc and backup local copy?"$NC
 		echo -e $GRN"\t1) Backup and copy\n\t2) Copy and replace\n\t3) Skip"$NC
@@ -48,23 +51,29 @@ inst_plugins() {
 	curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 }
 
-inst() {
+setup() {
 	inst_plugins
 	set_zshrc
+}
+
+inst() {
 	cp $DIR/vimrc $HOME/.vimrc
 	case "$OS" in
 		'arch')
 			TGT=`pacman -T $ARCHDEPS`
 			sudo pacman -S $TGT
+			setup
 			;;
 		'fed')
 			sudo yum install $RPMDEPS -y
+			setup
 			;;
 		'deb')
 			dpkg -s $DEBDEPS >/dev/null 2>&1
 			if [ "$?" -ne "0" ] ; then
 				sudo apt-get install -y $DEBDEPS
 			fi
+			setup
 			;;
 	esac
 	vim +NeoBundleInstall +qall
