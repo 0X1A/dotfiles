@@ -14,6 +14,7 @@ alias gcism='git commit -S -s -m'
 alias gcis='git commit -s'
 alias gciss='git commit -S -s'
 alias gad='git add'
+alias gadp='git add -p'
 alias grm='git rm'
 alias grst='git reset'
 alias gdf='git diff'
@@ -28,4 +29,9 @@ galias() {
 	echo "Git aliases:"
 	echo
 	cat $HOME/.zsh/git
+}
+
+# Add repo with rw+
+grtap() {
+	git remote add $1 git@$2
 }
