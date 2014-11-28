@@ -16,7 +16,7 @@ Used Vim plugins:
 * [Vim-Multiple-Cursors](https://github.com/kristijanhusak/vim-multiple-curors)
 
 ## How to install
-Run `install --<distro>`, where distro can be `arch, fed, or deb`.
+Run `install --<distro> --[shell]`, where distro can be `arch, fed, or deb` and shell can be `fish or zsh`
 ### What it does
 Installs vim, zsh, sets up NeoBundle, and installs vim plugins.
 
