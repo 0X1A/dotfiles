@@ -1,3 +1,5 @@
+set shell=/bin/zsh
+
 if !1 | finish | endif
 
 if has('vim_starting')

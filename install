@@ -1,6 +1,8 @@
 #!/bin/bash
 
 DIR=$(dirname $0)
+FDIR="$HOME/.config/fish/"
+FCONF="$FDIR/config.fish"
 ARCHDEPS="vim zsh git"
 FEDDEPS="vim-enhanced zsh git"
 DEBDEPS="vim-nox zsh git"
@@ -23,9 +25,18 @@ case "$1" in
 		;;
 esac
 
-set_zshrc() {
+case $2 in
+	'--fish')
+		_SHELL="fish"
+		;;
+	'--zsh')
+		_SHELL="zsh"
+		;;
+esac
+
+set_zsh() {
 	mkdir -p $HOME/.zsh
-	cp $DIR/functions $DIR/git $HOME/.zsh
+	cp $DIR/zsh/* $HOME/.zsh
 	curl -L http://install.ohmyz.sh | sh
 	if [ -f $HOME/.zshrc ] ; then
 		echo -e $WHT"Copy .zshrc and backup local copy?"$NC
@@ -47,13 +58,35 @@ set_zshrc() {
 	fi
 }
 
+set_fish() {
+	git clone git://github.com/bpint/oh-my-fish.git ~/.oh-my-fish
+	cp $DIR/fish/* $FDIR
+	if [ -f $FCONF ] ; then
+		echo -e $WHT"Copy config.fish and backup local copy?"$NC
+		echo -e $GRN"\t1) Backup and copy\n\t2) Copy and replace\n\t3) Skip"$NC
+		read ANS
+	fi
+	if [[ $ANS == '1' ]] ; then
+		echo -e $WHT"Copying and backing up .zshrc to .zshrcbak"$NC
+		mv $HOME/.zshrc $HOME/.zshrcbak
+		cp $DIR/$FCONF $HOME/$FCONF
+	elif [[ $ANS == '2' ]] ; then
+		echo -e $WHT"Copying and replacing"$NC
+		cp $DIR/$FCONF $HOME/$FCONF
+	elif [[ $ANS == '3' ]] ; then
+		echo -e $WHT"Skipping..."$NC
+	fi
+	if [ ! -f $HOME/.zshrc ] ; then
+		cp $DIR/$FCONF $HOME/$FCONF
+	fi
+}
+
 inst_plugins() {
 	curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 }
 
 setup() {
 	inst_plugins
-	set_zshrc
 }
 
 inst() {
@@ -74,6 +107,14 @@ inst() {
 				sudo apt-get install -y $DEBDEPS
 			fi
 			setup
+			;;
+	esac
+	case "$_SHELL" in
+		'fish')
+			set_fish
+			;;
+		'zsh')
+			set_zsh
 			;;
 	esac
 	vim +NeoBundleInstall +qall
