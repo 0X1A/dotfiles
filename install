@@ -129,7 +129,7 @@ usage() {
 	echo -e "\t--help\tDisplay this"
 	echo -e "Shells:"
 	echo -e "\t--fish\tInstall fish dotfiles"
-	echo -e "\t--zsh\nInstall zsh dotfiles"
+	echo -e "\t--zsh\tInstall zsh dotfiles"
 	exit
 }
 
