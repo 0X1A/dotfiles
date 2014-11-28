@@ -67,17 +67,17 @@ set_fish() {
 		read ANS
 	fi
 	if [[ $ANS == '1' ]] ; then
-		echo -e $WHT"Copying and backing up .zshrc to .zshrcbak"$NC
-		mv $HOME/.zshrc $HOME/.zshrcbak
-		cp $DIR/$FCONF $HOME/$FCONF
+		echo -e $WHT"Copying and backing up config.fish to config.fish.bak"$NC
+		mv $FCONF $FDIR/config.fish.bak
+		cp $DIR/fish/config.fish $HOME/$FCONF
 	elif [[ $ANS == '2' ]] ; then
 		echo -e $WHT"Copying and replacing"$NC
-		cp $DIR/$FCONF $HOME/$FCONF
+		cp $DIR/fish/config.fish $HOME/$FCONF
 	elif [[ $ANS == '3' ]] ; then
 		echo -e $WHT"Skipping..."$NC
 	fi
 	if [ ! -f $HOME/.zshrc ] ; then
-		cp $DIR/$FCONF $HOME/$FCONF
+		cp $DIR/fish/config.fish $HOME/$FCONF
 	fi
 }
 
@@ -121,12 +121,15 @@ inst() {
 }
 
 usage() {
-	echo -e "usage: install --[distro]\n"
+	echo -e "usage: install --[distro] --[shell]\n"
 	echo -e "Distros:"
 	echo -e "\t--arch\tInstall Arch dotfiles"
 	echo -e "\t--deb\tInstall Debian dotfiles"
 	echo -e "\t--fed\tInstall Fedora dotfiles"
 	echo -e "\t--help\tDisplay this"
+	echo -e "Shells:"
+	echo -e "\t--fish\tInstall fish dotfiles"
+	echo -e "\t--zsh\nInstall zsh dotfiles"
 	exit
 }
 
