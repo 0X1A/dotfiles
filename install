@@ -1,8 +1,8 @@
 #!/bin/bash
 
 DIR=$(dirname $0)
-FDIR="$HOME/.config/fish/"
-FCONF="$FDIR/config.fish"
+FDIR="$HOME/.config/fish"
+FCONF="config.fish"
 ARCHDEPS="vim zsh git"
 FEDDEPS="vim-enhanced zsh git"
 DEBDEPS="vim-nox zsh git"
@@ -61,23 +61,23 @@ set_zsh() {
 set_fish() {
 	git clone git://github.com/bpinto/oh-my-fish.git ~/.oh-my-fish
 	cp $DIR/fish/* $FDIR
-	if [ -f $FCONF ] ; then
+	if [ -f $FDIR/$FCONF ] ; then
 		echo -e $WHT"Copy config.fish and backup local copy?"$NC
 		echo -e $GRN"\t1) Backup and copy\n\t2) Copy and replace\n\t3) Skip"$NC
 		read ANS
 	fi
 	if [[ $ANS == '1' ]] ; then
 		echo -e $WHT"Copying and backing up config.fish to config.fish.bak"$NC
-		mv $FCONF $FDIR/config.fish.bak
-		cp $DIR/fish/config.fish $HOME/$FCONF
+		mv $FIDR/$FCONF $FDIR/config.fish.bak
+		cp $DIR/fish/config.fish $FDIR/$FCONF
 	elif [[ $ANS == '2' ]] ; then
 		echo -e $WHT"Copying and replacing"$NC
-		cp $DIR/fish/config.fish $HOME/$FCONF
+		cp $DIR/fish/config.fish $FDIR/$FCONF
 	elif [[ $ANS == '3' ]] ; then
 		echo -e $WHT"Skipping..."$NC
 	fi
-	if [ ! -f $HOME/.zshrc ] ; then
-		cp $DIR/fish/config.fish $HOME/$FCONF
+	if [ ! -f $FDIR/$FCONF ] ; then
+		cp $DIR/fish/config.fish $FDIR/$FCONF
 	fi
 }
 
