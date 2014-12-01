@@ -10,8 +10,4 @@ set fish_theme agnoster
 
 set PATH $PATH $HOME/.config/scripts $HOME/.config/bspwm/panel
 
-set -x PANEL_FIFO /tmp/panel-fifo
-set -x PANEL_HEIGHT 20
-set -x NOTIFY_PIPE /tmp/notify-pipe
-
 alias c="clear"
