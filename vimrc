@@ -13,11 +13,13 @@ call neobundle#end()
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/nercommenter'
 NeoBundle 'wting/rust.vim'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'kristijanhusak/vim-multiple-cursors'
+NeoBundle 'dag/vim-fish'
 
 filetype plugin on
 NeoBundleCheck
