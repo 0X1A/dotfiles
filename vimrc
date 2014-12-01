@@ -12,7 +12,6 @@ call neobundle#end()
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'wting/rust.vim'
 NeoBundle 'altercation/vim-colors-solarized'
@@ -62,11 +61,6 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" Empty nerdtree
-let NERDTreeShowHidden = 1
-let g:NERDTreeWinSize = 20
-autocmd vimenter * NERDTree
 
 " Powerline fonts for Airline
 let g:airline_powerline_fonts = 1
