@@ -1,4 +1,4 @@
-set shell=/bin/zsh
+set shell=/bin/bash
 
 if !1 | finish | endif
 
@@ -13,7 +13,7 @@ call neobundle#end()
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'scrooloose/nercommenter'
+NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'wting/rust.vim'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'bling/vim-airline'
