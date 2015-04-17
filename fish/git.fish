@@ -43,3 +43,9 @@ function force-create-release
 	git tag -s -f $argv
 	git config --global user.signingkey 4B2076CA
 end
+
+function gpsh-all
+	for i in (git remote)
+		git push $i $argv[1]
+	end
+end

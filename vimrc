@@ -14,12 +14,17 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'wting/rust.vim'
+NeoBundle 'rust-lang/rust.vim'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'kristijanhusak/vim-multiple-cursors'
 NeoBundle 'dag/vim-fish'
+NeoBundle 'phildawes/racer', {
+\	'build' : {
+\		'unix': 'cargo build --release',
+\	}
+\}
 
 filetype plugin on
 NeoBundleCheck
@@ -56,6 +61,8 @@ set ttymouse=xterm2
 " Syntastic
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_include_dirs = ['include', 'inc', 'src']
+let g:syntastic_check_on_open = 0
+let g:syntastic_error_symbol = "✘ "
 
 " Neocomplete
 let g:acp_enableAtStartup = 0
@@ -63,6 +70,13 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+" Neocomplete + Racer
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.rust =
+    \ '[^.[:digit:] *\t]\%(\.\|\::\)\%(\h\w*\)\?'
 
 " Powerline fonts for Airline
 let g:airline_powerline_fonts = 1
@@ -82,3 +96,7 @@ inoremap {}     {}
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_realtime = 1
 highlight SignColumn ctermbg=black
+
+" Racer
+set hidden
+let g:racer_cmd = "$HOME/.vim/bundle/racer/target/release/racer"
