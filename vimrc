@@ -8,7 +8,6 @@ if has('vim_starting')
 endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
-call neobundle#end()
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplete.vim'
@@ -20,16 +19,18 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'kristijanhusak/vim-multiple-cursors'
 NeoBundle 'dag/vim-fish'
+NeoBundle 'cespare/vim-toml'
+NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'phildawes/racer', {
 \	'build' : {
-\		'unix': 'cargo build --release',
+\		'unix': 'cargo build -j2 --release',
 \	}
 \}
+call neobundle#end()
 
-filetype plugin on
+filetype plugin indent on
 NeoBundleCheck
 
-filetype indent on
 syntax on
 
 set number
@@ -87,10 +88,10 @@ set background=dark
 colorscheme solarized
 
 " Auto bracing
-inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
+"inoremap {      {}<Left>
+"inoremap {<CR>  {<CR>}<Esc>O
+"inoremap {{     {
+"inoremap {}     {}
 
 " Git gutter
 let g:gitgutter_sign_column_always = 1
