@@ -10,19 +10,20 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'rust-lang/rust.vim'
-NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'kristijanhusak/vim-multiple-cursors'
+NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'dag/vim-fish'
 NeoBundle 'cespare/vim-toml'
+NeoBundle 'racer-rust/vim-racer'
 NeoBundle 'phildawes/racer', {
 \	'build' : {
-\		'unix': 'cargo build -j2 --release',
+\		'unix': 'cargo build -j10 --release',
 \	}
 \}
 call neobundle#end()
@@ -37,7 +38,6 @@ set cc=80
 set cursorline
 set hlsearch
 set ignorecase
-set showmode
 
 " Disable mode show (use for powerline)
 set laststatus=2
@@ -61,6 +61,7 @@ set ttymouse=xterm2
 " Syntastic
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_include_dirs = ['include', 'inc', 'src']
+let g:syntastic_cpp_compiler_options = '--std=c++11'
 let g:syntastic_check_on_open = 0
 let g:syntastic_error_symbol = "✘ "
 
@@ -71,20 +72,13 @@ let g:neocomplete#enable_smart_case = 1
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
-" Neocomplete + Racer
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.rust =
-    \ '[^.[:digit:] *\t]\%(\.\|\::\)\%(\h\w*\)\?'
-
 " Powerline fonts for Airline
 let g:airline_powerline_fonts = 1
 
-" Solarized color scheme
-set t_Co=256
+" Set color scheme
+let base16colorspace=256
 set background=dark
-colorscheme solarized
+colorscheme base16-ocean
 
 " Auto bracing
 inoremap {      {}<Left>

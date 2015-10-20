@@ -1,13 +1,23 @@
 #!/usr/bin/fish
 
-set fish_path $HOME/.oh-my-fish
+# Check if on Arch and import /etc/profile.d/*
+set DIST (lsb_release -i | awk -F ' ' '{print $3}')
+
+if [ $DIST = "Arch" ]
+	env -i HOME=$HOME dash -l -c printenv | sed -e '/PATH/s/:/ /g;s/=/ /;s/^/set -x /' | source
+end
+
 set config $HOME/.config/fish
+set plugins $config/plugins
 
-set fish_theme agnoster
+# Load plugins in $HOME/.config/fish/plugins
+for plug in (ls $plugins)
+	source $plugins/$plug
+end
 
-. $fish_path/oh-my-fish.fish
-. $config/git.fish
+# Set colors for shell
+if test -d $HOME/.config/base16-shell
+	eval $HOME/.config/base16-shell/base16-ocean.dark.sh
+end
 
-set PATH $PATH $HOME/.config/scripts $HOME/.config/bspwm/panel (ruby -rubygems -e "puts Gem.user_dir")/bin
-
-alias c="clear"
+set PATH $PATH (ruby -rubygems -e "puts Gem.user_dir")/bin

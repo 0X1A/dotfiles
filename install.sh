@@ -1,67 +1,30 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DIR=$(dirname $0)
 FDIR="$HOME/.config/fish"
 FCONF="config.fish"
-ARCHDEPS="vim zsh git"
-FEDDEPS="vim-enhanced zsh git"
-DEBDEPS="vim-nox zsh git"
+ARCHDEPS="vim git"
+FEDDEPS="vim-enhanced git"
+DEBDEPS="vim-nox git"
 NC='\e[0m'
 WHT='\e[1;37m'
 GRN='\e[0;32m'
 
 case "$1" in
 	'--arch')
-		ZSHRCFILE=".zshrcarch"
 		OS="arch"
 		;;
 	'--fed')
-		ZSHRCFILE=".zshrcfed"
 		OS="fed"
 		;;
 	'--deb')
-		ZSHRCFILE=".zshrcdeb"
 		OS="deb"
 		;;
 esac
 
-case $2 in
-	'--fish')
-		_SHELL="fish"
-		;;
-	'--zsh')
-		_SHELL="zsh"
-		;;
-esac
-
-set_zsh() {
-	mkdir -p $HOME/.zsh
-	cp $DIR/zsh/* $HOME/.zsh
-	curl -L http://install.ohmyz.sh | sh
-	if [ -f $HOME/.zshrc ] ; then
-		echo -e $WHT"Copy .zshrc and backup local copy?"$NC
-		echo -e $GRN"\t1) Backup and copy\n\t2) Copy and replace\n\t3) Skip"$NC
-		read ANS
-	fi
-	if [[ $ANS == '1' ]] ; then
-		echo -e $WHT"Copying and backing up .zshrc to .zshrcbak"$NC
-		mv $HOME/.zshrc $HOME/.zshrcbak
-		cp $DIR/$ZSHRCFILE $HOME/.zshrc
-	elif [[ $ANS == '2' ]] ; then
-		echo -e $WHT"Copying and replacing"$NC
-		cp $DIR/$ZSHRCFILE $HOME/.zshrc
-	elif [[ $ANS == '3' ]] ; then
-		echo -e $WHT"Skipping..."$NC
-	fi
-	if [ ! -f $HOME/.zshrc ] ; then
-		cp $DIR/$ZSHRCFILE $HOME/.zshrc
-	fi
-}
-
 set_fish() {
 	mkdir -p ~/.config/fish
-	git clone git://github.com/bpinto/oh-my-fish.git ~/.oh-my-fish
-	cp $DIR/fish/* $FDIR
+	cp -r $DIR/fish/* $FDIR
 	if [ -f $FDIR/$FCONF ] ; then
 		echo -e $WHT"Copy config.fish and backup local copy?"$NC
 		echo -e $GRN"\t1) Backup and copy\n\t2) Copy and replace\n\t3) Skip"$NC
@@ -82,6 +45,11 @@ set_fish() {
 	fi
 }
 
+inst_rust() {
+	curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh
+	multirust default stable
+}
+
 inst_plugins() {
 	curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 }
@@ -90,8 +58,16 @@ setup() {
 	inst_plugins
 }
 
-inst() {
+inst_color() {
+	git clone https://github.com/chriskempson/base16-shell $HOME/.config/base16-shell/base16-ocean.dark.sh
+	gcl https://github.com/chriskempson/base16-gnome-terminal
+	bash base16-gnome-terminal/base16-ocean.dark.sh
+}
+
+install() {
 	cp $DIR/vimrc $HOME/.vimrc
+	inst_color
+	set_fish
 	case "$OS" in
 		'arch')
 			TGT=`pacman -T $ARCHDEPS`
@@ -110,33 +86,22 @@ inst() {
 			setup
 			;;
 	esac
-	case "$_SHELL" in
-		'fish')
-			set_fish
-			;;
-		'zsh')
-			set_zsh
-			;;
-	esac
 	vim +NeoBundleInstall +qall
 }
 
 usage() {
-	echo -e "usage: install --[distro] --[shell]\n"
+	echo -e "usage: install --[distro]\n"
 	echo -e "Distros:"
 	echo -e "\t--arch\tInstall Arch dotfiles"
 	echo -e "\t--deb\tInstall Debian dotfiles"
 	echo -e "\t--fed\tInstall Fedora dotfiles"
 	echo -e "\t--help\tDisplay this"
-	echo -e "Shells:"
-	echo -e "\t--fish\tInstall fish dotfiles"
-	echo -e "\t--zsh\tInstall zsh dotfiles"
 	exit
 }
 
 case "$1" in
 	'--arch'|'--deb'|'--fed')
-		inst
+		install
 		;;
 	*)
 		usage
