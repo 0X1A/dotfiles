@@ -3,7 +3,7 @@
 DIR=$(dirname $0)
 FDIR="$HOME/.config/fish"
 FCONF="config.fish"
-ARCHDEPS="vim git"
+ARCHDEPS="vim git rust cargo"
 FEDDEPS="vim-enhanced git"
 DEBDEPS="vim-nox git"
 NC='\e[0m'
@@ -59,8 +59,8 @@ setup() {
 }
 
 inst_color() {
-	git clone https://github.com/chriskempson/base16-shell $HOME/.config/base16-shell/base16-ocean.dark.sh
-	gcl https://github.com/chriskempson/base16-gnome-terminal
+	git clone https://github.com/chriskempson/base16-shell $HOME/.config/base16-shell
+	git clone https://github.com/chriskempson/base16-gnome-terminal
 	bash base16-gnome-terminal/base16-ocean.dark.sh
 }
 
