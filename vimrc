@@ -20,12 +20,14 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'dag/vim-fish'
 NeoBundle 'cespare/vim-toml'
-NeoBundle 'racer-rust/vim-racer'
-NeoBundle 'phildawes/racer', {
-\	'build' : {
-\		'unix': 'cargo build -j10 --release',
-\	}
-\}
+NeoBundle 'Valloric/YouCompleteMe', {
+     \ 'build'      : {
+        \ 'mac'     : './install.py',
+        \ 'unix'    : './install.py',
+        \ 'windows' : 'install.py',
+        \ 'cygwin'  : './install.py'
+        \ }
+     \ }
 call neobundle#end()
 
 filetype plugin indent on
@@ -65,13 +67,6 @@ let g:syntastic_cpp_compiler_options = '--std=c++11'
 let g:syntastic_check_on_open = 0
 let g:syntastic_error_symbol = "✘ "
 
-" Neocomplete
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
 " Powerline fonts for Airline
 let g:airline_powerline_fonts = 1
 
@@ -90,7 +85,3 @@ inoremap {}     {}
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_realtime = 1
 highlight SignColumn ctermbg=black
-
-" Racer
-set hidden
-let g:racer_cmd = "$HOME/.vim/bundle/racer/target/release/racer"
