@@ -11,21 +11,20 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'rust-lang/rust.vim'
-NeoBundle 'bling/vim-airline'
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'rdnetto/YCM-Generator'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'dag/vim-fish'
 NeoBundle 'cespare/vim-toml'
+NeoBundle 'digitaltoad/vim-pug'
+NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'Valloric/YouCompleteMe', {
      \ 'build'      : {
-        \ 'mac'     : './install.py',
-        \ 'unix'    : './install.py',
-        \ 'windows' : 'install.py',
-        \ 'cygwin'  : './install.py'
+        \ 'unix'    : './install.py --clang-completer --racer-completer',
         \ }
      \ }
 call neobundle#end()
@@ -67,9 +66,6 @@ let g:syntastic_cpp_compiler_options = '--std=c++11'
 let g:syntastic_check_on_open = 0
 let g:syntastic_error_symbol = "✘ "
 
-" Powerline fonts for Airline
-let g:airline_powerline_fonts = 1
-
 " Set color scheme
 let base16colorspace=256
 set background=dark
@@ -85,3 +81,7 @@ inoremap {}     {}
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_realtime = 1
 highlight SignColumn ctermbg=black
+
+let g:ycm_global_ycm_extra_conf = expand('$HOME/.ycm_extra_conf.py')
+let g:ycm_rust_src_path = expand('$HOME/Repositories/rust/src')
+let g:ycm_error_symbol = "✘"

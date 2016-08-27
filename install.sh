@@ -46,8 +46,8 @@ set_fish() {
 }
 
 inst_rust() {
-	curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh
-	multirust default stable
+	curl https://sh.rustup.rs -sSf | sh
+	set -U PATH $PATH $HOME/.cargo/bin
 }
 
 inst_plugins() {
@@ -55,12 +55,14 @@ inst_plugins() {
 }
 
 setup() {
+	inst_rust
 	inst_plugins
 }
 
 inst_color() {
 	git clone https://github.com/chriskempson/base16-shell $HOME/.config/base16-shell
 	git clone https://github.com/chriskempson/base16-gnome-terminal
+	chmod +x $HOME/.config/base16-shell/scripts/base16-ocean.sh
 	bash base16-gnome-terminal/base16-ocean.dark.sh
 }
 

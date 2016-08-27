@@ -17,7 +17,7 @@ end
 
 # Set colors for shell
 if test -d $HOME/.config/base16-shell
-	eval $HOME/.config/base16-shell/base16-ocean.dark.sh
+	eval $HOME/.config/base16-shell/scripts/base16-ocean.sh
 end
 
-set PATH $PATH (ruby -rubygems -e "puts Gem.user_dir")/bin
+set PATH $PATH (ruby -rubygems -e "puts Gem.user_dir")/bin $HOME/.cargo/bin
