@@ -16,17 +16,12 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'rust-lang/rust.vim'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'rdnetto/YCM-Generator'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'dag/vim-fish'
 NeoBundle 'cespare/vim-toml'
 NeoBundle 'digitaltoad/vim-pug'
 NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'Valloric/YouCompleteMe', {
-     \ 'build'      : {
-        \ 'unix'    : './install.py --clang-completer --racer-completer',
-        \ }
-     \ }
+NeoBundle 'Valloric/YouCompleteMe'
 call neobundle#end()
 
 filetype plugin indent on
@@ -85,3 +80,7 @@ highlight SignColumn ctermbg=black
 let g:ycm_global_ycm_extra_conf = expand('$HOME/.ycm_extra_conf.py')
 let g:ycm_rust_src_path = expand('$HOME/Repositories/rust/src')
 let g:ycm_error_symbol = "✘"
+
+if has("termguicolors")
+	set termguicolors
+endif
