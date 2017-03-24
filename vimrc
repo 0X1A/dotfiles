@@ -18,6 +18,7 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'dag/vim-fish'
+NeoBundle 'mxw/vim-jsx'
 NeoBundle 'cespare/vim-toml'
 NeoBundle 'digitaltoad/vim-pug'
 NeoBundle 'pangloss/vim-javascript'
@@ -84,3 +85,9 @@ let g:ycm_error_symbol = "✘"
 if has("termguicolors")
 	set termguicolors
 endif
+
+au FileType javascript setl sw=2 sts=2 et
+au FileType html setl sw=2 sts=2 et
+au FileType css setl sw=2 sts=2 et
+au FileType pug setl sw=2 sts=2 et
+au FileType ruby setl sw=2 sts=2 et
